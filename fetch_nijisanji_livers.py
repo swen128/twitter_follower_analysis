@@ -1,6 +1,7 @@
 import os
 import time
 
+import jsonstreams
 from tweepy_wrapper import api, cursor
 from dotenv import load_dotenv
 
@@ -12,8 +13,7 @@ users_list_path = os.environ.get('USERS_LIST_PATH')
 screen_name = "nijisanji_app"
 list_name = "list1"
 
-with open(users_list_path, mode="w", encoding="utf-8") as f:
+with jsonstreams.Stream(jsonstreams.Type.array, users_list_path) as s:
     for page in cursor(api.list_members, slug=list_name, owner_screen_name=screen_name):
-        names = [user.screen_name + '\n' for user in page]
-        f.writelines(names)
-        f.flush()
+        for user in page:
+            s.write(user._json)

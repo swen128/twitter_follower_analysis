@@ -1,5 +1,5 @@
 .env
 .ipynb_checkpoints/
 /data/
-users
+users.json
 __pycache__/

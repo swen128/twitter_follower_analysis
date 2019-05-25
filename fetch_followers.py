@@ -1,3 +1,4 @@
+import json
 import os
 import time
 
@@ -10,7 +11,8 @@ data_dir = os.environ.get('DATA_DIR')
 users_list_path = os.environ.get('USERS_LIST_PATH')
 
 with open(users_list_path, 'r') as f:
-    screen_names = [name.strip() for name in f.readlines()]
+    users = json.load(f)
+    screen_names = [user.screen_name for user in users]
 
 for screen_name in screen_names:
     print('fetching followers of ' + screen_name)
