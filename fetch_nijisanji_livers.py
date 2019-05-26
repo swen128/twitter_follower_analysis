@@ -1,9 +1,9 @@
 import os
-import time
 
 import jsonstreams
-from tweepy_wrapper import api, cursor
 from dotenv import load_dotenv
+
+from tweepy_wrapper import api, cursor
 
 
 load_dotenv()
