@@ -1,6 +1,9 @@
-.env
 .ipynb_checkpoints/
+.vscode/
+__pycache__/
 /data/
 /img/
+/venv/
+
 users.json
-__pycache__/
+.env
