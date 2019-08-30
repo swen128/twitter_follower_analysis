@@ -1,7 +1,9 @@
 import json
 import os
 
-from src.tweepy_wrapper import api, cursor
+from tweepy import Cursor
+
+from src.tweepy_wrapper import api
 
 
 def main(data_dir: str, users_list_path: str):
@@ -11,10 +13,12 @@ def main(data_dir: str, users_list_path: str):
 
     for screen_name in screen_names:
         print('fetching followers of ' + screen_name)
+
+        cursor = Cursor(api.followers_ids, screen_name=screen_name, count=2048)
+
         with open(os.path.join(data_dir, screen_name), mode="w", encoding="utf-8") as f:
-            for page in cursor(api.followers_ids, screen_name=screen_name):
-                ids = [str(i) + '\n' for i in page]
-                f.writelines(ids)
+            for user_id in cursor.items():
+                f.write(f'{user_id}\n')
                 f.flush()
 
 
