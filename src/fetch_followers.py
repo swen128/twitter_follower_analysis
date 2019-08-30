@@ -11,6 +11,8 @@ def main(users_list_path: str, out_dir: str):
         users = json.load(f)
         screen_names = [user['screen_name'] for user in users]
 
+    Path(out_dir).mkdir(exist_ok=True)
+
     for screen_name in screen_names:
         print('fetching followers of ' + screen_name)
 
