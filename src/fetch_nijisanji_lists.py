@@ -1,4 +1,4 @@
-from tweepy_wrapper import api
+from src.tweepy_wrapper import api
 
 screen_name = "nijisanji_app"
 for twilist in api.lists_all(screen_name=screen_name):

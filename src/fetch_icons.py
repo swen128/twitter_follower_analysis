@@ -2,16 +2,16 @@ import json
 import os
 from urllib.request import urlretrieve
 
-from dotenv import load_dotenv
 
-load_dotenv()
-img_dir = os.environ.get('IMG_DIR')
-users_list_path = os.environ.get('USERS_LIST_PATH')
+def main(img_dir: str, users_list_path: str):
+    with open(users_list_path, mode='r') as f:
+        users = json.load(f)
 
-with open(users_list_path, mode='r') as f:
-    users = json.load(f)
+    for user in users:
+        url = user['profile_image_url'].replace('_normal.jpg', '.jpg')
+        path = os.path.join(img_dir, user['screen_name'] + '.jpg')
+        urlretrieve(url, path)
 
-for user in users:
-    url = user['profile_image_url'].replace('_normal.jpg', '.jpg')
-    path = os.path.join(img_dir, user['screen_name'] + '.jpg')
-    urlretrieve(url, path)
+
+if __name__ == '__main__':
+    main(img_dir='img', users_list_path='resources/users.json')
