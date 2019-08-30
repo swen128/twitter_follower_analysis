@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 
 from tweepy_wrapper import api, cursor
 
-
 load_dotenv()
 data_dir = os.environ.get('DATA_DIR')
 users_list_path = os.environ.get('USERS_LIST_PATH')

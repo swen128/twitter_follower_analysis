@@ -2,9 +2,8 @@ from tweepy_wrapper import api
 
 screen_name = "nijisanji_app"
 for twilist in api.lists_all(screen_name=screen_name):
-    print("slug="+twilist.slug)
-    print("name="+twilist.name)
-
+    print("slug=" + twilist.slug)
+    print("name=" + twilist.name)
 
 # slug=list
 # name=【公式】にじさんじ統合以降
