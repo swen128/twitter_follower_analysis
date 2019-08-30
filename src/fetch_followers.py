@@ -6,7 +6,7 @@ from tweepy import Cursor
 from src.tweepy_wrapper import api
 
 
-def main(data_dir: str, users_list_path: str):
+def main(users_list_path: str, out_dir: str):
     with open(users_list_path, 'r') as f:
         users = json.load(f)
         screen_names = [user['screen_name'] for user in users]
@@ -15,7 +15,7 @@ def main(data_dir: str, users_list_path: str):
         print('fetching followers of ' + screen_name)
 
         cursor = Cursor(api.followers_ids, screen_name=screen_name, count=2048)
-        out_path = Path(data_dir) / screen_name
+        out_path = Path(out_dir) / screen_name
 
         with open(out_path, mode="w", encoding="utf-8") as f:
             for user_id in cursor.items():
@@ -24,4 +24,4 @@ def main(data_dir: str, users_list_path: str):
 
 
 if __name__ == '__main__':
-    main(data_dir='resources', users_list_path='resources/users.json')
+    main(users_list_path='resources/users.json', out_dir='resources/followers')
