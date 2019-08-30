@@ -1,7 +1,6 @@
 import json
-import os
-from urllib.request import urlretrieve
 from pathlib import Path
+from urllib.request import urlretrieve
 
 
 def main(img_dir: str, users_list_path: str):
@@ -12,7 +11,7 @@ def main(img_dir: str, users_list_path: str):
 
     for user in users:
         url = user['profile_image_url'].replace('_normal.jpg', '.jpg')
-        path = os.path.join(img_dir, user['screen_name'] + '.jpg')
+        path = Path(img_dir) / (user['screen_name'] + '.jpg')
         urlretrieve(url, path)
 
 

@@ -1,5 +1,5 @@
 import json
-import os
+from pathlib import Path
 
 from tweepy import Cursor
 
@@ -15,8 +15,9 @@ def main(data_dir: str, users_list_path: str):
         print('fetching followers of ' + screen_name)
 
         cursor = Cursor(api.followers_ids, screen_name=screen_name, count=2048)
+        out_path = Path(data_dir) / screen_name
 
-        with open(os.path.join(data_dir, screen_name), mode="w", encoding="utf-8") as f:
+        with open(out_path, mode="w", encoding="utf-8") as f:
             for user_id in cursor.items():
                 f.write(f'{user_id}\n')
                 f.flush()
